@@ -34,10 +34,10 @@
     <ClCompile Include="src\AsciiAlphabet.cpp" />
     <ClCompile Include="src\DFA.cpp" />
     <ClCompile Include="src\FSM.cpp" />
-    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NFA.cpp" />
     <ClCompile Include="src\RegexMatcher.cpp" />
     <ClCompile Include="src\RegexParser.cpp" />
+    <ClCompile Include="tests\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3AC65819-1DB9-47B1-AD1E-A120FEEFE626}</ProjectGuid>

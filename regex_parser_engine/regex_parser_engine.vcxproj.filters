@@ -16,6 +16,9 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{04e8c31c-9b15-4dae-9284-01cbd5fa5f0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{377377f6-bec7-4c1c-afc3-a8f787de607d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Alphabet.h">
@@ -56,9 +59,6 @@
     <ClCompile Include="src\FSM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\NFA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -70,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="src\DFA.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\main.cpp">
+      <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
