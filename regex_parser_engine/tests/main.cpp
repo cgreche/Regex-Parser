@@ -7,8 +7,8 @@
 #include <iostream>
 #include <string>
 
-#include "..\\src\\RegexParser.h"
-#include "..\\src\\RegexMatcher.h"
+#include "..\\include\\RegexParser.h"
+#include "..\\include\\RegexMatcher.h"
 
 void printNode(RegexNode *node, int level = 0)
 {
@@ -439,7 +439,7 @@ void insert_regex(void *param) {
 	std::string tag;
 	std::getline(std::cin,tag);
 	printf("Parsing: %s...\n",input.c_str());
-	int index = manager->insertRegex(input.c_str(), strdup(tag.c_str()));
+	int index = manager->insertRegex(input.c_str(), tag.c_str());
 	RegexEntry *entry = manager->regexEntry(index);
 	NFA *nfa = entry->associatedNFA;
 	DFA *dfa = entry->associatedDFA;

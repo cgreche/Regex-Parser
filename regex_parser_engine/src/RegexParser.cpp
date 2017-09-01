@@ -233,7 +233,7 @@ RegexNode *RegexParser::_concat()
 
 RegexNode *RegexParser::_atom()
 {
-	RegexNode *result;
+	RegexNode *result = NULL;
 	if(accept('(')) {
 		result = _regex();
 		expect(')');
