@@ -195,7 +195,7 @@ bool Bitset::none() {
 }
 
 bool Bitset::all() {
-	int i = m_blockCount - 1;
+	unsigned int i = m_blockCount - 1;
 	int remainingBits = m_bitCount % BITS_PER_BLOCK;
 	if (remainingBits > 0) {
 		if (m_blocks[i] != (1 << remainingBits) - 1)
@@ -240,8 +240,8 @@ bool Bitset::operator!=(const Bitset& right) {
 }
 
 Bitset& Bitset::operator &=(const Bitset& right) {
-	int i = 0;
-	int blockCount = right.m_blockCount < m_blockCount ? right.m_blockCount : m_blockCount;
+	unsigned int i = 0;
+	unsigned int blockCount = right.m_blockCount < m_blockCount ? right.m_blockCount : m_blockCount;
 	while (i < blockCount) {
 		m_blocks[i] &= right.m_blocks[i];
 		++i;
@@ -250,8 +250,8 @@ Bitset& Bitset::operator &=(const Bitset& right) {
 }
 
 Bitset& Bitset::operator |=(const Bitset& right) {
-	int i = 0;
-	int blockCount = right.m_blockCount < m_blockCount ? right.m_blockCount : m_blockCount;
+	unsigned int i = 0;
+	unsigned int blockCount = right.m_blockCount < m_blockCount ? right.m_blockCount : m_blockCount;
 	while (i < blockCount) {
 		m_blocks[i] |= right.m_blocks[i];
 		++i;
@@ -261,8 +261,8 @@ Bitset& Bitset::operator |=(const Bitset& right) {
 }
 
 Bitset& Bitset::operator ^=(const Bitset& right) {
-	int i = 0;
-	int blockCount = right.m_blockCount < m_blockCount ? right.m_blockCount : m_blockCount;
+	unsigned int i = 0;
+	unsigned int blockCount = right.m_blockCount < m_blockCount ? right.m_blockCount : m_blockCount;
 	while (i < blockCount) {
 		m_blocks[i] ^= right.m_blocks[i];
 		++i;
@@ -276,15 +276,15 @@ Bitset Bitset::operator~() {
 }
 
 Bitset& Bitset::operator<<=(unsigned int pos) {
-	int shiftSize = pos / BITS_PER_BLOCK;
+	unsigned int shiftSize = pos / BITS_PER_BLOCK;
 	if (shiftSize > 0) {
-		for (int i = m_blockCount - 1; i >= 0; --i)
+		for (unsigned int i = m_blockCount - 1; i >= 0; --i)
 			m_blocks[i] = shiftSize <= i ? m_blocks[i - shiftSize] : 0;
 	}
 
 	int remainingBits = pos % BITS_PER_BLOCK;
 	if (remainingBits > 0) {
-		int i;
+		unsigned int i;
 		for (i = m_blockCount - 1; i > 0; --i)
 			m_blocks[i] = (m_blocks[i] << remainingBits) | (m_blocks[i - 1] >> (BITS_PER_BLOCK - remainingBits));
 		m_blocks[i] <<= remainingBits;
