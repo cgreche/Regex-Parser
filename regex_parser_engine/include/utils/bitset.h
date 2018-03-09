@@ -3,81 +3,91 @@
 #ifndef __BITSET_H__
 #define __BITSET_H__
 
-#include <bitset>
+#include <string>
+
+typedef unsigned long BlockType;
+#define BYTES_PER_BLOCK sizeof(BlockType)
+#define BITS_PER_BLOCK (BYTES_PER_BLOCK*8)
+#define SMALL_BITSET_BITCOUNT 0x80
+#define SMALL_BITSET_BLOCKCOUNT (SMALL_BITSET_BITCOUNT/BITS_PER_BLOCK)
+
+#define BLOCK_SET (~0UL)
+#define BLOCK_RESET (0UL)
 
 class Bitset
 {
-	std::bitset<0x80> m_bitset;
+	BlockType m_smallBitset[SMALL_BITSET_BLOCKCOUNT];
+	unsigned int m_bitCount;
+	unsigned int m_blockCount;
+	unsigned int m_blockSize;
+	unsigned int m_totalBufferSize;
+	BlockType *m_blocks;
 
+	void _deleteBlocks();
+	void _set(int bit, bool state);
+	bool _test(int bit);
+
+	void _trim();
 public:
-	Bitset() {
+	Bitset();
+	Bitset(unsigned int bitCount);
+	Bitset(const Bitset &bitset);  // copy constructor
 
-	}
+	~Bitset();
 
-	Bitset(unsigned int bitCount) {
+	void resize(unsigned int bitCount);
 
-	}
+	Bitset& set(bool state = true);
+	Bitset& set(int pos, bool state = true);
+	Bitset& set(int pos[], unsigned int count, bool state = true);
+	Bitset& reset();
+	Bitset& reset(int pos);
+	Bitset& reset(int pos[], unsigned int count);
+	Bitset& flip();
+	Bitset& flip(int pos);
 
-	~Bitset() {
-	
-	}
+	bool test(int pos);
+	bool test(int pos[], unsigned int count);
+	bool any();
+	bool none();
+	bool all();
 
-	void resize(unsigned int bitCount) { /*todo*/ }
+	inline size_t size() const { return m_bitCount; }
 
-	inline void set() { m_bitset.set(); }
-	inline void set(unsigned int pos) { m_bitset.set(pos); }
-	inline void reset() { m_bitset.reset(); }
-	inline void reset(unsigned int pos) { m_bitset.reset(pos); }
-	inline void flip() { m_bitset.flip(); }
-	inline void flip(unsigned int pos) { m_bitset.flip(pos); }
-	inline size_t size() const { return m_bitset.size(); }
+	bool operator==(const Bitset& right);
+	bool operator!=(const Bitset& right);
+	Bitset& operator &=(const Bitset& right);
+	Bitset& operator |=(const Bitset& right);
+	Bitset& operator ^=(const Bitset& right);
+	Bitset& operator<<=(unsigned int pos);
+	Bitset& operator>>=(unsigned int pos);
+	Bitset& operator=(const Bitset& right);
 
-	inline bool test(unsigned int pos) { return m_bitset.test(pos); }
-	inline bool any() { return m_bitset.any(); }
-	inline bool none() { return m_bitset.none(); }
-	inline bool all() { return m_bitset.all(); }
+	Bitset operator~();
 
-	inline bool operator==(const Bitset& right) { return this->m_bitset == right.m_bitset; }
-	inline Bitset& operator &=(const Bitset& right) {
-		this->m_bitset &= right.m_bitset;
-		return *this;
-	}
-	inline Bitset& operator |=(const Bitset& right) {
-		this->m_bitset |= right.m_bitset;
-		return *this;
-	}
-	inline Bitset& operator ^=(const Bitset& right) {
-		this->m_bitset ^= right.m_bitset;
-		return *this;
-	}
+	friend Bitset operator&(const Bitset &left, const Bitset &right);
+	friend Bitset operator|(const Bitset &left, const Bitset &right);
+	friend Bitset operator^(const Bitset &left, const Bitset &right);
 
-	inline Bitset operator~() {
-		Bitset ret;
-		ret.m_bitset = ~m_bitset;
-		return ret;
-	}
-
-	inline Bitset& operator<<=(unsigned int pos) {
-		this->m_bitset <<= pos;
-		return *this;
-	}
-
-	inline Bitset& operator>>=(unsigned int pos) {
-		this->m_bitset >>= pos;
-		return *this;
-	}
+	std::string toString();
 
 };
 
 inline Bitset operator&(const Bitset &left, const Bitset &right) {
-	Bitset ret = left;
+	Bitset ret(left);
 	ret &= right;
 	return ret;
 }
 
 inline Bitset operator|(const Bitset &left, const Bitset &right) {
-	Bitset ret = left;
+	Bitset ret(left);
 	ret |= right;
+	return ret;
+}
+
+inline Bitset operator^(const Bitset &left, const Bitset &right) {
+	Bitset ret = Bitset(left);
+	ret ^= right;
 	return ret;
 }
 

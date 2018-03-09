@@ -39,6 +39,9 @@
     <ClCompile Include="..\..\..\tests\main.cpp">
       <Filter>tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\include\utils\bitset.cpp">
+      <Filter>include\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\Alphabet.h">

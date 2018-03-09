@@ -150,6 +150,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\include\utils\bitset.cpp" />
     <ClCompile Include="..\..\..\src\AsciiAlphabet.cpp" />
     <ClCompile Include="..\..\..\src\DFA.cpp" />
     <ClCompile Include="..\..\..\src\FSM.cpp" />
