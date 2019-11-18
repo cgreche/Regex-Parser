@@ -274,7 +274,7 @@ struct MatchInfo
 	const char *input;
 	int sm;
 	int em;
-	void *param;
+	const char *tag;
 	DFA *dfaFrom;
 	int curState;
 };
@@ -286,15 +286,15 @@ struct RegexEntry
 {
 public:
 	std::string regex;
-	void *param;
+	std::string tag;
 	RegexMatcher *matcher;
 	NFA *associatedNFA;
 	DFA *associatedDFA;
 	MatchingCallbackFunction m_matchingInputCallbackFunction;
 
-	RegexEntry(Alphabet* alphabet, const char *regex, MatchingCallbackFunction matchFunction, void *param) {
+	RegexEntry(Alphabet* alphabet, const char *regex, MatchingCallbackFunction matchFunction, const char *tag) {
 		this->regex = regex;
-		this->param = param;
+		this->tag = tag;
 		matcher = new RegexMatcher(regex,alphabet);
 		associatedNFA = matcher->nfa();
 		associatedDFA = matcher->dfa();
@@ -349,7 +349,7 @@ public:
 					mf.sm = curPos;
 					mf.em = curPos + biggestMatchLen;
 					mf.dfaFrom = m_regexList[biggestMatchEntryIndex]->associatedDFA;
-					mf.param = m_regexList[biggestMatchEntryIndex]->param;
+					mf.tag = m_regexList[biggestMatchEntryIndex]->tag.c_str();
 					mf.curState =  m_regexList[biggestMatchEntryIndex]->associatedDFA->currentStateNumber();
 					res = (*m_regexList[biggestMatchEntryIndex]->m_matchingInputCallbackFunction)(mf);
 				}
@@ -372,12 +372,12 @@ public:
 		return count;
 	}
 
-	int insertRegex(const char *regex, const char *param, MatchingCallbackFunction matchingFunction = NULL, Alphabet *alphabet = NULL) {
+	int insertRegex(const char *regex, const char *tag, MatchingCallbackFunction matchingFunction = NULL, Alphabet *alphabet = NULL) {
 		if(alphabet == NULL)
 			alphabet = m_defaultAlphabet;
 		if(matchingFunction == NULL)
 			matchingFunction = m_defaultMatchingFunction;
-		RegexEntry *entry = new RegexEntry(alphabet,regex,matchingFunction,(void*)param);
+		RegexEntry *entry = new RegexEntry(alphabet,regex,matchingFunction,tag);
 		m_regexList.push_back(entry);
 		return m_regexList.size() - 1;
 	}
@@ -466,7 +466,7 @@ void print_regex_list(void *param) {
 	int regexCount = manager->regexCount();
 	for(int i = 0; i < regexCount; ++i) {
 		RegexEntry *entry = manager->regexEntry(i);
-		printf("[%d] %s (%s)\n", i, entry->regex.c_str(), (const char*)entry->param);
+		printf("[%d] %s (%s)\n", i, entry->regex.c_str(), entry->tag.c_str());
 	}
 }
 
@@ -512,8 +512,8 @@ struct Option g_optList[] = {
 //todo: add parameter of type MatchingFunction on insertRegex
 int MatchFunction(MatchInfo matchInfo)
 {
-	if(strcmp((const char*)matchInfo.param, "BLANK") != 0) {
-		printf("Found at: %d - %d (%s)\n", matchInfo.sm, matchInfo.em, (const char*)matchInfo.param);
+	if(strcmp(matchInfo.tag, "BLANK") != 0) {
+		printf("Found at: %d - %d (%s)\n", matchInfo.sm, matchInfo.em, matchInfo.tag);
 	}
 	return 1;
 }
