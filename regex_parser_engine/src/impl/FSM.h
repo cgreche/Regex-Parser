@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 #include "utils/bitset.h"
-#include "Alphabet.h"
+#include "../Alphabet.h"
 #include "State.h"
 
 typedef std::vector<Bitset *> BitsetList;

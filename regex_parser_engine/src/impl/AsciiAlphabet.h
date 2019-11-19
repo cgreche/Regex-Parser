@@ -3,7 +3,7 @@
 #ifndef __ASCII_ALPHABET_H__
 #define __ASCII_ALPHABET_H__
 
-#include "Alphabet.h"
+#include "../Alphabet.h"
 
 //Char flags
 #define CF_UPPER 0x00000001

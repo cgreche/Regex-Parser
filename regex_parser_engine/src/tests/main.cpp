@@ -7,8 +7,8 @@
 #include <iostream>
 #include <string>
 
-#include "..\\include\\RegexParser.h"
-#include "..\\include\\RegexMatcher.h"
+#include "../src/impl/RegexParser.h"
+#include "../src/impl/RegexMatcherImpl.h"
 
 void printNode(RegexNode *node, int level = 0)
 {
@@ -287,7 +287,7 @@ struct RegexEntry
 public:
 	std::string regex;
 	std::string tag;
-	RegexMatcher *matcher;
+	RegexMatcherImpl *matcher;
 	NFA *associatedNFA;
 	DFA *associatedDFA;
 	MatchingCallbackFunction m_matchingInputCallbackFunction;
@@ -295,7 +295,7 @@ public:
 	RegexEntry(Alphabet* alphabet, const char *regex, MatchingCallbackFunction matchFunction, const char *tag) {
 		this->regex = regex;
 		this->tag = tag;
-		matcher = new RegexMatcher(regex,alphabet);
+		matcher = new RegexMatcherImpl(regex,alphabet);
 		associatedNFA = matcher->nfa();
 		associatedDFA = matcher->dfa();
 		m_matchingInputCallbackFunction = matchFunction;
@@ -333,7 +333,7 @@ public:
 			int biggestMatchEntryIndex = -1;
 
 			for(int i = 0; i < m_regexList.size(); ++i) {
-				RegexMatcher *matcher = m_regexList[i]->matcher;
+				RegexMatcherImpl *matcher = m_regexList[i]->matcher;
 				if(res |= matcher->matchPartially(c, &matchLen)) {
 					if(matchLen > biggestMatchLen) {
 						biggestMatchLen = matchLen;
