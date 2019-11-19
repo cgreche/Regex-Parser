@@ -4,6 +4,8 @@
 #include "NFA.h"
 //#include "DFA.h"
 
+static AsciiAlphabet defaultAlphabet;
+
 void createDefaultSymSets(Alphabet *alphabet)
 {
 	if(g_symSetTable.size() == 0) {
@@ -71,7 +73,7 @@ void createDefaultSymSets(Alphabet *alphabet)
 
 RegexMatcherImpl::RegexMatcherImpl(const char *regex, Alphabet *alphabet) {
 	if(!alphabet)
-		alphabet = new AsciiAlphabet;
+		alphabet = &defaultAlphabet;
 	createDefaultSymSets(alphabet);
 	NFA *nfa = new NFA(*alphabet);	
 	nfa->buildFromRegex(regex);
