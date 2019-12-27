@@ -7,8 +7,8 @@
 #include <iostream>
 #include <string>
 
-#include "../src/impl/RegexParser.h"
-#include "../src/impl/RegexMatcherImpl.h"
+#include "../impl/RegexParser.h"
+#include "../impl/RegexMatcherImpl.h"
 
 void printNode(RegexNode *node, int level = 0)
 {
