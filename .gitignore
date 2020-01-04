@@ -2,11 +2,8 @@
 Debug
 Release
 x64
-regex_parser_engine.VC.db
-regex_parser_engine/Release
-regex_parser_engine/Debug
-regex_parser_engine/x64
-/export-lib
-/regex_parser_engine/project/vs2017/regex_parser_engine/export-lib
+
 /test/export-lib/test.tlog
 /test/export-lib
+/regex_parser/project/vs2019/export-lib
+/regex_parser/project/vs2019/regex_parser/export-lib
