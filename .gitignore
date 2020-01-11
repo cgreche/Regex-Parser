@@ -7,3 +7,5 @@ x64
 /test/export-lib
 /regex_parser/project/vs2019/export-lib
 /regex_parser/project/vs2019/regex_parser/export-lib
+/regex_parser/project/vs2019/lib-debug
+/regex_parser/project/vs2019/regex_parser/lib-debug

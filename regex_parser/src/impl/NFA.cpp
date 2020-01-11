@@ -258,12 +258,12 @@ State *DFA::newStateFromClosure(StateSet &closure)
 void DFA::buildTransTable()
 {
 	int i, j;
-	int charCount = 256;
+	int charCount = m_alphabet->characterCount();
 	int stateCount = m_states.size();
 	m_transTable = new int*[stateCount];
 	for(i = 0; i < stateCount; ++i) {
 		m_transTable[i] = new int[charCount];
-		memset(m_transTable[i], -1, charCount);
+		memset(m_transTable[i], -1, charCount*sizeof(int));
 	}
 
 	for(i = 0; i < stateCount; ++i) {

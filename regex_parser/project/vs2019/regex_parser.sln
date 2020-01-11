@@ -11,6 +11,8 @@ Global
 		Debug|x86 = Debug|x86
 		export-lib|x64 = export-lib|x64
 		export-lib|x86 = export-lib|x86
+		lib-debug|x64 = lib-debug|x64
+		lib-debug|x86 = lib-debug|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
@@ -23,6 +25,10 @@ Global
 		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.export-lib|x64.Build.0 = Debug|x64
 		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.export-lib|x86.ActiveCfg = export-lib|Win32
 		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.export-lib|x86.Build.0 = export-lib|Win32
+		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.lib-debug|x64.ActiveCfg = lib-debug|x64
+		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.lib-debug|x64.Build.0 = lib-debug|x64
+		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.lib-debug|x86.ActiveCfg = lib-debug|Win32
+		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.lib-debug|x86.Build.0 = lib-debug|Win32
 		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.Release|x64.ActiveCfg = Release|x64
 		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.Release|x64.Build.0 = Release|x64
 		{BA30FA5D-271F-42BE-AAF2-6D7C9965EA9C}.Release|x86.ActiveCfg = Release|Win32

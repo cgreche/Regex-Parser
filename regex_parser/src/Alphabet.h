@@ -18,8 +18,9 @@ public:
 	virtual bool isPrint(int c) = 0;
 	virtual bool isXDigit(int c) = 0;
 	virtual bool isBlank(int c) = 0;
-	virtual int char2sym(int c) = 0;
+
 	virtual bool isValid(int c) = 0;
+	virtual unsigned int characterCount() = 0;
 };
 
 #endif

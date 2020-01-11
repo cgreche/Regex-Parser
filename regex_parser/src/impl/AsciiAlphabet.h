@@ -39,8 +39,8 @@ public:
 	virtual bool isXDigit(int c) { return isType(c,CF_XDIGIT);  }
 	virtual bool isBlank(int c) { return isType(c,CF_BLANK);  }
 
-	virtual int char2sym(int c) { return c; }
 	virtual bool isValid(int c) { return c > 0 && c < 0x80; }
+	virtual unsigned int characterCount() { return 0x80; }
 };
 
 #endif
