@@ -3,12 +3,6 @@
 
 #include "Alphabet.h"
 
-#ifdef DLL_BUILD
-	#define DLL_EXPORT extern "C" __declspec(dllexport)
-#else
-	#define DLL_EXPORT extern "C" __declspec(dllimport)
-#endif
-
 class RegexMatcher
 {
 public:
@@ -17,7 +11,7 @@ public:
 	virtual bool contains(const char* input, int* startPos, int* endPos) = 0;
 };
 
-DLL_EXPORT
+extern "C"
 RegexMatcher* createRegexMatcher(const char* regex, Alphabet* alphabet);
 
 #endif
